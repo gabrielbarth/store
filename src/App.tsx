@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Products } from './pages/products/view';
+import { SafeAreaView } from 'react-native';
 
 export function App() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text> teste </Text>
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Products />
+    </SafeAreaView>
   );
 }
