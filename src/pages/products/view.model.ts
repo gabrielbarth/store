@@ -1,34 +1,15 @@
 import { useEffect, useState } from 'react';
 import { ProductModel } from '../../common/models/product.model';
 import { ProductsViewModel } from './model';
+import { api } from '../../services/api';
 
 export const useProductsViewModel = (): ProductsViewModel => {
+  const [products, setProducts] = useState<ProductModel[]>(
+    [] as ProductModel[],
+  );
   const [cartProducts, setCartProducts] = useState<ProductModel[]>(
     [] as ProductModel[],
   );
-  const fakeProducts: ProductsViewModel['products'] = [
-    {
-      id: 1,
-      title: 'Mens Casual Premium Slim Fit T-Shirts',
-      price: 22.3,
-      image:
-        'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
-    },
-    {
-      id: 2,
-      title: 'Mens Casual Premium Slim Fit T-Shirts',
-      price: 22.3,
-      image:
-        'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
-    },
-    {
-      id: 3,
-      title: 'Mens Casual Premium Slim Fit T-Shirts',
-      price: 22.3,
-      image:
-        'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
-    },
-  ];
 
   function addProduct(product: ProductModel) {
     setCartProducts(prev => [...prev, product]);
@@ -55,13 +36,34 @@ export const useProductsViewModel = (): ProductsViewModel => {
     addProduct(product);
   }
 
+  async function fetchProducts() {
+    const result = await api.get('products');
+
+    const fetchedProducts = result.data;
+
+    const formattedProducts = fetchedProducts.map((product: any) => {
+      return {
+        id: product.id,
+        image: product.image,
+        title: product.title,
+        price: product.price,
+      } as ProductModel;
+    });
+
+    setProducts(formattedProducts);
+  }
+
+  useEffect(() => {
+    fetchProducts();
+  }, [cartProducts]);
+
   useEffect(() => {
     console.log('PRODUTOS DO CARRINHO =', JSON.stringify(cartProducts));
   }, [cartProducts]);
 
   return {
     onSelectProduct,
-    products: fakeProducts,
+    products,
     cartProducts,
   };
 };
