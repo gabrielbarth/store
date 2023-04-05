@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     borderRadius: 4,
     width: 220,
     alignItems: 'center',
+    justifyContent: 'space-around',
   },
   image: {
     width: 200,

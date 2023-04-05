@@ -11,6 +11,11 @@ type ProductProps = {
 };
 
 function Product({ product, onSelectProduct, productSelected }: ProductProps) {
+  const title =
+    product.title.length < 30
+      ? product.title
+      : `${product.title.substring(0, 30).trim()}.`;
+
   return (
     <View style={styles.container}>
       <Image
@@ -18,7 +23,7 @@ function Product({ product, onSelectProduct, productSelected }: ProductProps) {
         style={styles.image}
         resizeMode="contain"
       />
-      <Text style={styles.title}>{product.title}</Text>
+      <Text style={styles.title}>{title}</Text>
       <Text style={styles.price}>R$ {product.price}</Text>
       <TouchableOpacity
         style={styles.button}
