@@ -3,32 +3,38 @@ import { View, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
 
 import { Product } from '../../common/components/product';
 import { useProductsViewModel } from './view.model';
+import { Header } from '../../common/components/header';
 
 export function Products() {
   const { products, cartProducts, onSelectProduct, isLoading } =
     useProductsViewModel();
 
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      {isLoading ? (
-        <ActivityIndicator size="large" />
-      ) : (
-        <FlatList
-          data={products}
-          numColumns={2}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={product => String(product.id)}
-          renderItem={({ item }) => (
-            <Product
-              product={item}
-              onSelectProduct={() => onSelectProduct(item)}
-              productSelected={cartProducts.some(
-                product => product.id === item.id,
-              )}
-            />
-          )}
-        />
-      )}
+      <Header onSelectCart={() => {}} productsAmount="10" />
+      <FlatList
+        data={products}
+        numColumns={2}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={product => String(product.id)}
+        renderItem={({ item }) => (
+          <Product
+            product={item}
+            onSelectProduct={() => onSelectProduct(item)}
+            productSelected={cartProducts.some(
+              product => product.id === item.id,
+            )}
+          />
+        )}
+      />
     </View>
   );
 }
