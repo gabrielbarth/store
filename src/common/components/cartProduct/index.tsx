@@ -24,9 +24,9 @@ function CartProduct({ product, onRemoveProduct }: CartProductProps) {
           style={styles.image}
           resizeMode="contain"
         />
-        <View>
+        <View style={styles.textContent}>
           <Text style={styles.title}>{title}</Text>
-          <Text style={styles.price}>R$ {product.price}</Text>
+          <Text style={styles.price}>{product.price}</Text>
         </View>
       </View>
       <TouchableOpacity

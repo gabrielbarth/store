@@ -24,7 +24,7 @@ function Product({ product, onSelectProduct, productSelected }: ProductProps) {
         resizeMode="contain"
       />
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.price}>R$ {product.price}</Text>
+      <Text style={styles.price}>{product.price}</Text>
       <TouchableOpacity
         style={styles.button}
         activeOpacity={0.8}

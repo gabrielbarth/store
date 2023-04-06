@@ -11,6 +11,7 @@ import {
 } from '../../common/hooks';
 import { addProduct, removeProduct } from '../../store/slices/cart';
 import { api } from '../../services/api';
+import { formatPrice } from '../../common/utils/formatPrice';
 
 export const useProductsViewModel = (): ProductsViewModel => {
   const navigation = useAppNavigator();
@@ -27,7 +28,7 @@ export const useProductsViewModel = (): ProductsViewModel => {
     dispatch(addProduct(product));
   }
 
-  function removeFromCart(productId: number) {
+  function removeFromCart(productId: string) {
     dispatch(removeProduct(productId));
   }
 
@@ -60,10 +61,10 @@ export const useProductsViewModel = (): ProductsViewModel => {
 
       const formattedProducts = fetchedProducts.map((product: any) => {
         return {
-          id: product.id,
+          id: String(product.id),
           image: product.image,
           title: product.title,
-          price: product.price,
+          price: formatPrice(product.price),
         } as ProductModel;
       });
 
