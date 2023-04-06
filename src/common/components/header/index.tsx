@@ -7,12 +7,22 @@ import { useReduxSelector } from '../../hooks';
 
 type HeaderProps = {
   onSelectCart: () => void;
+  onSelectGoBack?: () => void;
 };
 
-function Header({ onSelectCart }: HeaderProps) {
+function Header({ onSelectCart, onSelectGoBack }: HeaderProps) {
   const productsAmount = useReduxSelector(state => state.cart.products.length);
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { justifyContent: onSelectGoBack ? 'space-between' : 'flex-end' },
+      ]}>
+      {onSelectGoBack && (
+        <TouchableOpacity activeOpacity={0.8} onPress={onSelectGoBack}>
+          <Icon name="arrow-left" size={20} color="#f1f1f1" />
+        </TouchableOpacity>
+      )}
       <TouchableOpacity activeOpacity={0.8} onPress={onSelectCart}>
         <Icon name="shopping-cart" size={40} color="#f1f1f1" />
         {productsAmount > 0 && (

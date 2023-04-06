@@ -5,4 +5,5 @@ export interface ProductsViewModel {
   onSelectProduct: (product: ProductModel) => void;
   cartProducts: ProductModel[];
   isLoading: boolean;
+  onSelectCart: () => void;
 }

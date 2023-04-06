@@ -6,8 +6,8 @@ export const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#2e2e2e',
     padding: 15,
-    alignItems: 'flex-end',
-    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   amountContainer: {
     position: 'absolute',

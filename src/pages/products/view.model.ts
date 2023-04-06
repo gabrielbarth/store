@@ -4,11 +4,16 @@ import { Alert } from 'react-native';
 import { ProductModel } from '../../common/models/product.model';
 import { ProductsViewModel } from './model';
 
-import { useReduxDispatch, useReduxSelector } from '../../common/hooks';
+import {
+  useReduxDispatch,
+  useReduxSelector,
+  useAppNavigator,
+} from '../../common/hooks';
 import { addProduct, removeProduct } from '../../store/slices/cart';
 import { api } from '../../services/api';
 
 export const useProductsViewModel = (): ProductsViewModel => {
+  const navigation = useAppNavigator();
   const dispatch = useReduxDispatch();
   const cartProducts = useReduxSelector(state => state.cart.products);
 
@@ -37,6 +42,14 @@ export const useProductsViewModel = (): ProductsViewModel => {
     }
 
     addToCart(product);
+  }
+
+  function onSelectCart() {
+    if (cartProducts.length === 0) {
+      Alert.alert('Você precisa adicionar produtos ao carrinho antes.');
+      return;
+    }
+    navigation.navigate('cart');
   }
 
   async function fetchProducts() {
@@ -80,5 +93,6 @@ export const useProductsViewModel = (): ProductsViewModel => {
     products,
     cartProducts,
     isLoading,
+    onSelectCart,
   };
 };

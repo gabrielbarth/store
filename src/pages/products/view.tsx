@@ -6,7 +6,7 @@ import { useProductsViewModel } from './view.model';
 import { Header } from '../../common/components/header';
 
 export function Products() {
-  const { products, cartProducts, onSelectProduct, isLoading } =
+  const { products, cartProducts, onSelectProduct, isLoading, onSelectCart } =
     useProductsViewModel();
 
   if (isLoading) {
@@ -19,7 +19,7 @@ export function Products() {
 
   return (
     <View style={styles.container}>
-      <Header onSelectCart={() => {}} />
+      <Header onSelectCart={onSelectCart} />
       <FlatList
         data={products}
         numColumns={2}

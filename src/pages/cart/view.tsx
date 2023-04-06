@@ -6,11 +6,11 @@ import { CartProduct } from '../../common/components/cartProduct';
 import { useProductsViewModel } from './view.model';
 
 export function Cart() {
-  const { cartProducts, onRemoveProduct } = useProductsViewModel();
+  const { cartProducts, onRemoveProduct, onGoBack } = useProductsViewModel();
 
   return (
     <View style={styles.container}>
-      <Header onSelectCart={() => {}} />
+      <Header onSelectCart={() => {}} onSelectGoBack={onGoBack} />
       <FlatList
         data={cartProducts}
         showsVerticalScrollIndicator={false}
