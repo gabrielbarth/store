@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
+
 import { ProductModel } from '../../common/models/product.model';
 import { ProductsViewModel } from './model';
 import { api } from '../../services/api';
@@ -10,6 +12,7 @@ export const useProductsViewModel = (): ProductsViewModel => {
   const [cartProducts, setCartProducts] = useState<ProductModel[]>(
     [] as ProductModel[],
   );
+  const [isLoading, setIsLoading] = useState(true);
 
   function addProduct(product: ProductModel) {
     setCartProducts(prev => [...prev, product]);
@@ -37,33 +40,45 @@ export const useProductsViewModel = (): ProductsViewModel => {
   }
 
   async function fetchProducts() {
-    const result = await api.get('products');
+    try {
+      const result = await api.get('products');
 
-    const fetchedProducts = result.data;
+      const fetchedProducts = result.data;
 
-    const formattedProducts = fetchedProducts.map((product: any) => {
-      return {
-        id: product.id,
-        image: product.image,
-        title: product.title,
-        price: product.price,
-      } as ProductModel;
-    });
+      const formattedProducts = fetchedProducts.map((product: any) => {
+        return {
+          id: product.id,
+          image: product.image,
+          title: product.title,
+          price: product.price,
+        } as ProductModel;
+      });
 
-    setProducts(formattedProducts);
+      setProducts(formattedProducts);
+    } catch (error) {
+      console.log(error);
+      Alert.alert(
+        'Um erro imprevisto ocorreu. Por favor, reinicie o aplicativo.',
+      );
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   useEffect(() => {
     fetchProducts();
-  }, [cartProducts]);
+  }, []);
 
   useEffect(() => {
-    console.log('PRODUTOS DO CARRINHO =', JSON.stringify(cartProducts));
+    if (__DEV__) {
+      console.log('PRODUTOS DO CARRINHO =', JSON.stringify(cartProducts));
+    }
   }, [cartProducts]);
 
   return {
     onSelectProduct,
     products,
     cartProducts,
+    isLoading,
   };
 };
