@@ -19,7 +19,7 @@ export function Products() {
 
   return (
     <View style={styles.container}>
-      <Header onSelectCart={() => {}} productsAmount="10" />
+      <Header onSelectCart={() => {}} />
       <FlatList
         data={products}
         numColumns={2}

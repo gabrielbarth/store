@@ -3,27 +3,27 @@ import { Alert } from 'react-native';
 
 import { ProductModel } from '../../common/models/product.model';
 import { ProductsViewModel } from './model';
+
+import { useReduxDispatch, useReduxSelector } from '../../common/hooks';
+import { addProduct, removeProduct } from '../../store/slices/cart';
 import { api } from '../../services/api';
 
 export const useProductsViewModel = (): ProductsViewModel => {
+  const dispatch = useReduxDispatch();
+  const cartProducts = useReduxSelector(state => state.cart.products);
+
   const [products, setProducts] = useState<ProductModel[]>(
     [] as ProductModel[],
   );
-  const [cartProducts, setCartProducts] = useState<ProductModel[]>(
-    [] as ProductModel[],
-  );
+
   const [isLoading, setIsLoading] = useState(true);
 
-  function addProduct(product: ProductModel) {
-    setCartProducts(prev => [...prev, product]);
+  function addToCart(product: ProductModel) {
+    dispatch(addProduct(product));
   }
 
-  function removeProduct(productId: number) {
-    const updatedCardProducts = cartProducts.filter(
-      product => product.id !== productId,
-    );
-
-    setCartProducts(updatedCardProducts);
+  function removeFromCart(productId: number) {
+    dispatch(removeProduct(productId));
   }
 
   function onSelectProduct(product: ProductModel) {
@@ -32,11 +32,11 @@ export const useProductsViewModel = (): ProductsViewModel => {
     );
 
     if (productExistsOnCart) {
-      removeProduct(product.id);
+      removeFromCart(product.id);
       return;
     }
 
-    addProduct(product);
+    addToCart(product);
   }
 
   async function fetchProducts() {
