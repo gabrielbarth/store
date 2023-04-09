@@ -5,6 +5,7 @@
 
     /* Completeness */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
-    "typeRoots": ["./src/@types"]
+    "typeRoots": ["./src/@types"],
+    "types": ["jest", "node"]
   }
 }

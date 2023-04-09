@@ -5,6 +5,8 @@
  * @format
  */
 
+import '@types/jest';
+
 module.exports = {
   transformer: {
     getTransformOptions: async () => ({
