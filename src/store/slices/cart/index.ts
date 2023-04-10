@@ -1,11 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProductModel } from '../../../common/models/product.model';
 
+export type CartState = {
+  products: ProductModel[];
+};
+
+const initialState: CartState = {
+  products: [],
+};
+
 export const cartSlice = createSlice({
   name: '@cart',
-  initialState: {
-    products: [] as ProductModel[],
-  },
+  initialState,
   reducers: {
     addProduct: (state, action: PayloadAction<ProductModel>) => {
       state.products = [...state.products, action.payload];
