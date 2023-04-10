@@ -1,15 +1,15 @@
 # store
 
-This project is a simple version of generic store app which I have created using React Native + Typescript. It is consuming a [fake products API](https://fakestoreapi.com/) to test it. I also used Redux Toolkit to cart state management. To test it I used Jest + Testing Library React Native.
+This project is a simple version of a generic store app which I have created using React Native + Typescript. It is consuming a [fake products API](https://fakestoreapi.com/) to test it. I also used Redux Toolkit to cart state management. To test it I used Jest + Testing Library React Native.
 
 ### Running on your machine:
 
-- Faça um clone do projeto para sua máquina com: `git clone git@github.com:gabrielbarth/store.git`;
-- Acesse a pasta do projeto `cd store`;
-- Instale as dependências o projeto com o `yarn install`;
-- Para executar o projeto, utilize o comando `npx react-native run-ios` ou `npx react-native run-android`;
-- Utilize o comando `npx react-native start` caso o projeto não inicialize automaticamente;
-- Para executar os testes unitários, basta utilizar o comando `yarn test`.
+- Clone to your machine: `git clone git@github.com:gabrielbarth/store.git`;
+- Go to project directory `cd store`;
+- Install the project dependencies `yarn install`;
+- Run `npx react-native run-ios` or `npx react-native run-android` to open on emulator;
+- Run `npx react-native start` if project doesn't initialize automatically;
+- Run `yarn test` to check tests with jest.
 
 
 ### Screenshots
