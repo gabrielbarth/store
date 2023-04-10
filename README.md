@@ -1,6 +1,6 @@
 # store
 
-This project is a simple version of generic store app which I have created using React Native + Typescript. It is consuming a fake products API provided to test it. I also used Redux Toolkit to state management. To test it I used Jest + Testing Library React Native.
+This project is a simple version of generic store app which I have created using React Native + Typescript. It is consuming a [fake products API](https://fakestoreapi.com/) to test it. I also used Redux Toolkit to cart state management. To test it I used Jest + Testing Library React Native.
 
 ### Running on your machine:
 
@@ -12,8 +12,7 @@ This project is a simple version of generic store app which I have created using
 - Para executar os testes unitários, basta utilizar o comando `yarn test`.
 
 
-### Interfaces Visuais
-
+### Screenshots
 
 <p float="left">
 <img src="https://user-images.githubusercontent.com/42456106/230899188-3a0779d2-887f-41ad-833e-0f51419badd8.png" alt="Products Page" width="240" height="540" />
