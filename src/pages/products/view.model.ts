@@ -10,8 +10,7 @@ import {
   useAppNavigator,
 } from '../../common/hooks';
 import { addProduct, removeProduct } from '../../store/slices/cart';
-import { api } from '../../services/api';
-import { formatPrice } from '../../common/utils/formatPrice';
+import { fetchProducts } from '../../services/fetchProducts';
 
 export const useProductsViewModel = (): ProductsViewModel => {
   const navigation = useAppNavigator();
@@ -53,22 +52,13 @@ export const useProductsViewModel = (): ProductsViewModel => {
     navigation.navigate('cart');
   }
 
-  async function fetchProducts() {
+  async function getProducts() {
     try {
-      const result = await api.get('products');
+      const fetchedProducts = await fetchProducts();
 
-      const fetchedProducts = result.data;
-
-      const formattedProducts = fetchedProducts.map((product: any) => {
-        return {
-          id: String(product.id),
-          image: product.image,
-          title: product.title,
-          price: formatPrice(product.price),
-        } as ProductModel;
-      });
-
-      setProducts(formattedProducts);
+      if (fetchedProducts && fetchedProducts.length > 0) {
+        setProducts(fetchedProducts);
+      }
     } catch (error) {
       console.log(error);
       Alert.alert(
@@ -80,7 +70,7 @@ export const useProductsViewModel = (): ProductsViewModel => {
   }
 
   useEffect(() => {
-    fetchProducts();
+    getProducts();
   }, []);
 
   useEffect(() => {

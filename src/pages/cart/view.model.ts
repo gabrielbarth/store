@@ -12,7 +12,7 @@ export const useProductsViewModel = (): ProductsViewModel => {
   const dispatch = useReduxDispatch();
   const cartProducts = useReduxSelector(state => state.cart.products);
 
-  function onRemoveProduct(productId: number) {
+  function onRemoveProduct(productId: string) {
     dispatch(removeProduct(productId));
   }
 

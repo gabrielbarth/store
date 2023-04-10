@@ -11,7 +11,7 @@ export function Products() {
 
   if (isLoading) {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} testID="Products_Loading">
         <ActivityIndicator size="large" />
       </View>
     );
