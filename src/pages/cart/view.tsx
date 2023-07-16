@@ -6,7 +6,8 @@ import { CartProduct } from '../../common/components/cartProduct';
 import { useProductsViewModel } from './view.model';
 
 export function Cart() {
-  const { cartProducts, onRemoveProduct, onGoBack } = useProductsViewModel();
+  const { cartProducts, onRemoveProduct, onGoBack, onAddProduct } =
+    useProductsViewModel();
 
   return (
     <View style={styles.container}>
@@ -19,6 +20,7 @@ export function Cart() {
           <CartProduct
             product={item}
             onRemoveProduct={() => onRemoveProduct(item.id)}
+            onAddProduct={() => onAddProduct(item)}
           />
         )}
       />
@@ -28,7 +30,7 @@ export function Cart() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    // flex: 1,
+    // justifyContent: 'center',
   },
 });
