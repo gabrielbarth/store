@@ -75,7 +75,7 @@ export const useProductsViewModel = (): ProductsViewModel => {
 
   useEffect(() => {
     if (__DEV__) {
-      console.log('PRODUTOS DO CARRINHO =', JSON.stringify(cartProducts));
+      console.log('PRODUCTS ON CART =', JSON.stringify(cartProducts));
     }
   }, [cartProducts]);
 

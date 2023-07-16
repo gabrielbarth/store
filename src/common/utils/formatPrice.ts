@@ -1,7 +1,7 @@
 export const formatPrice = (price: number) => {
-  return price.toLocaleString('pt-br', {
+  return price.toLocaleString('en-us', {
     style: 'currency',
-    currency: 'BRL',
+    currency: 'USD',
     minimumFractionDigits: 2,
   });
 };

@@ -27,6 +27,7 @@ export async function fetchProducts() {
         image: product.image,
         title: product.title,
         price: formatPrice(product.price),
+        quantity: 0,
       } as ProductModel;
     });
 

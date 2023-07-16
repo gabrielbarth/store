@@ -11,11 +11,6 @@ export type ProductProps = {
 };
 
 function Product({ product, onSelectProduct, productSelected }: ProductProps) {
-  const title =
-    product.title.length < 30
-      ? product.title
-      : `${product.title.substring(0, 30).trim()}.`;
-
   return (
     <View style={styles.container} testID="Product_Container">
       <Image
@@ -24,8 +19,12 @@ function Product({ product, onSelectProduct, productSelected }: ProductProps) {
         style={styles.image}
         resizeMode="contain"
       />
-      <Text style={styles.title} testID="Product_Title">
-        {title}
+      <Text
+        style={styles.title}
+        numberOfLines={1}
+        ellipsizeMode="tail"
+        testID="Product_Title">
+        {product.title}
       </Text>
       <Text style={styles.price} testID="Product_Price">
         {product.price}
